@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_search"
+        android:title="Поиск"
+        android:orderInCategory="200"
+        android:icon="@android:drawable/ic_menu_search"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_load_file"
+        android:orderInCategory="100"
+        android:icon="@android:drawable/ic_menu_save"
+        android:title="Загрузить файл"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_clear_all"
+        android:orderInCategory="300"
+        android:icon="@android:drawable/ic_menu_delete"
+        android:title="Очистить базу данных"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_change_pswd"
+        android:orderInCategory="400"
+        android:icon="@android:drawable/ic_menu_manage"
+        android:title="Сменить пароль"
+        app:showAsAction="never" />
+
+</menu>

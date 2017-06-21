@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="16dp">
+
+
+    <ImageView
+        android:layout_weight="1.5"
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:scaleType="fitCenter"
+        android:layout_height="match_parent"
+        android:src="@drawable/ic_action_music" />
+
+    <LinearLayout
+        android:layout_weight="10"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvSong"
+            android:textSize="18sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/holo_green_light"
+            android:fontFamily="monospace"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/tvArtist"
+            android:textSize="10sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/holo_green_light"
+            android:fontFamily="monospace"
+            android:text="TextView" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_weight="4"
+        android:id="@+id/tvID"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/holo_green_light"
+        android:fontFamily="monospace"
+        android:textAlignment="center"
+        android:text="123456" />
+
+</LinearLayout>
