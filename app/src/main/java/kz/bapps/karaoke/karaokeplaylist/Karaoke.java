@@ -9,6 +9,7 @@ class Karaoke {
     private String id;
     private String artist;
     private String song;
+    private String quality;
 
     public String getId() {
         return id;
@@ -32,5 +33,13 @@ class Karaoke {
 
     public void setSong(String song) {
         this.song = song;
+    }
+
+    public String getQuality() {
+        return quality;
+    }
+
+    public void setQuality(String quality) {
+        this.quality = quality;
     }
 }

@@ -30,8 +30,9 @@ public class SqliteHelper extends SQLiteOpenHelper {
     public static final String KEY_COMP_ID = "comp_id";
     public static final String KEY_ARTIST = "artist";
     public static final String KEY_SONG = "song";
+    public static final String KEY_QUALITY = "quality";
 
-    public static final String[] COLUMNS = {KEY_ID,KEY_COMP_ID,KEY_ARTIST,KEY_SONG};
+    public static final String[] COLUMNS = {KEY_ID,KEY_COMP_ID,KEY_ARTIST,KEY_SONG,KEY_QUALITY};
     
     // SQL statement to create karaoke table
     private static final String CREATE_TABLE =
@@ -39,7 +40,8 @@ public class SqliteHelper extends SQLiteOpenHelper {
                     KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     KEY_COMP_ID + " TEXT, "+
                     KEY_ARTIST + " TEXT, "+
-                    KEY_SONG + " TEXT )";
+                    KEY_SONG + " TEXT, "+
+                    KEY_QUALITY + " TEXT )";
 
     public SqliteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -70,9 +72,10 @@ public class SqliteHelper extends SQLiteOpenHelper {
 
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
-        values.put(KEY_COMP_ID, karaoke.getId()); // get title
-        values.put(KEY_ARTIST, karaoke.getArtist()); // get author
-        values.put(KEY_SONG, karaoke.getSong()); // get author
+        values.put(KEY_COMP_ID, karaoke.getId());
+        values.put(KEY_ARTIST, karaoke.getArtist());
+        values.put(KEY_SONG, karaoke.getSong());
+        values.put(KEY_SONG, karaoke.getQuality());
 
         // 3. insert
         db.insert(TABLE_KARAOKE, // table
@@ -100,7 +103,9 @@ public class SqliteHelper extends SQLiteOpenHelper {
         for(String str : searches) {
             query += (next_line ? " AND " : "") +
                     "(" + KEY_ARTIST + " LIKE '%" + str +
-                    "%' OR " + KEY_SONG + " LIKE '%" + str + "%')";
+                    "%' OR " + KEY_SONG + " LIKE '%" + str +
+                    "%' OR " + KEY_QUALITY + " LIKE '%" + str +
+                    "%')";
             next_line = true;
         }
 
@@ -119,6 +124,7 @@ public class SqliteHelper extends SQLiteOpenHelper {
                 karaoke.setId(cursor.getString(1));
                 karaoke.setArtist(cursor.getString(2));
                 karaoke.setSong(cursor.getString(3));
+                karaoke.setQuality(cursor.getString(4));
 
                 // Add Karaoke to Karaokes
                 Karaokes.add(karaoke);
@@ -161,6 +167,7 @@ public class SqliteHelper extends SQLiteOpenHelper {
            karaoke.setId(cursor.getString(1));
            karaoke.setArtist(cursor.getString(2));
            karaoke.setSong(cursor.getString(3));
+           karaoke.setQuality(cursor.getString(4));
        }
 
        cursor.close();

@@ -85,6 +85,7 @@ public class KaraokeIntentService extends IntentService {
                     values.put(SqliteHelper.KEY_COMP_ID, sheet.getCell(0, j).getContents());
                     values.put(SqliteHelper.KEY_SONG, sheet.getCell(1, j).getContents());
                     values.put(SqliteHelper.KEY_ARTIST, sheet.getCell(2, j).getContents());
+                    values.put(SqliteHelper.KEY_QUALITY, sheet.getCell(3, j).getContents());
                     db.insert(SqliteHelper.TABLE_KARAOKE, null, values);
 
                     intent.putExtra(EXTRA_COUNT, j);

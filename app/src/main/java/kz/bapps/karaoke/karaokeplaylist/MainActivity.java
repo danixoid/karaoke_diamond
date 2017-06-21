@@ -457,7 +457,8 @@ public class MainActivity extends AppCompatActivity implements
         }
 
         builder.setTitle(karaoke.getId())
-                .setMessage(karaoke.getArtist() +  " " + karaoke.getSong())
+                .setMessage(karaoke.getArtist() +  " " + karaoke.getSong() +
+                        " " + karaoke.getQuality())
                 .setIcon(R.drawable.ic_action_music)
                 .show();
     }

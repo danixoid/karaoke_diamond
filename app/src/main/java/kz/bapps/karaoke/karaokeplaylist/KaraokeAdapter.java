@@ -40,6 +40,7 @@ class KaraokeAdapter  extends RecyclerView.Adapter<KaraokeAdapter.ViewHolder> {
         holder.mId.setText(Karaokees.get(position).getId());
         holder.mArtist.setText(Karaokees.get(position).getArtist());
         holder.mSong.setText(Karaokees.get(position).getSong());
+        holder.mQuality.setText(Karaokees.get(position).getQuality());
 
 //        if (null != mListener && holder.mItem.isOwner()) {
 //            holder.mImgBtnEdit.setImageResource(android.R.drawable.ic_menu_edit);
@@ -71,6 +72,7 @@ class KaraokeAdapter  extends RecyclerView.Adapter<KaraokeAdapter.ViewHolder> {
         final TextView mId;
         final TextView mArtist;
         final TextView mSong;
+        final TextView mQuality;
         Karaoke mItem;
 
         ViewHolder(View view) {
@@ -79,6 +81,7 @@ class KaraokeAdapter  extends RecyclerView.Adapter<KaraokeAdapter.ViewHolder> {
             mId = (TextView) view.findViewById(R.id.tvID);
             mArtist = (TextView) view.findViewById(R.id.tvArtist);
             mSong = (TextView) view.findViewById(R.id.tvSong);
+            mQuality = (TextView) view.findViewById(R.id.tvQuality);
         }
 
         @Override
