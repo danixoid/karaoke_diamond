@@ -104,7 +104,7 @@ public class SqliteHelper extends SQLiteOpenHelper {
             next_line = true;
         }
 
-        query += " LIMIT 50";
+//        query += " LIMIT 50";
 
         // 2. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
