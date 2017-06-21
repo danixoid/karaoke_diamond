@@ -26,6 +26,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements
     private static final int FILE_SELECT_CODE = 13515;
     private static final int REQUEST_CODE = 1;
 
+    private static final String KEY_TEXT_VALUE = "SEARCH-FIELD";
     private static final String TEMP_PSWD = "12345";
     private static final String APP_NAME = "karaoke";
     private static final String FILE_PATH = "path";
@@ -62,6 +64,8 @@ public class MainActivity extends AppCompatActivity implements
     private RecyclerView mRecyclerView;
     private FrameLayout layoutBar;
     private SqliteHelper helper;
+
+    private String currentQuery;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,8 +114,17 @@ public class MainActivity extends AppCompatActivity implements
                 e.printStackTrace();
             }
         }
+
+        if (savedInstanceState != null) {
+            currentQuery = savedInstanceState.getString(KEY_TEXT_VALUE);
+        }
     }
 
+    @Override
+    protected void onSaveInstanceState (Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putCharSequence(KEY_TEXT_VALUE, currentQuery);
+    }
 
     @Override
     public void onResume() {
@@ -135,15 +148,30 @@ public class MainActivity extends AppCompatActivity implements
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
 
+        MenuItem searchItem = menu.findItem(R.id.action_search);
         final SearchView searchView = (SearchView) MenuItemCompat
-                .getActionView(menu.findItem(R.id.action_search));
+                .getActionView(searchItem);
         SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+
+        if (!TextUtils.isEmpty(currentQuery)) {
+            searchItem.expandActionView();
+            searchView.onActionViewExpanded();
+            searchView.setQuery(currentQuery, true);
+            searchView.clearFocus();
+
+            List<Karaoke> karaokeList = helper.getKaraokesByQuery(currentQuery);
+            RecyclerView.Adapter mAdapter = new KaraokeAdapter(MainActivity.this,
+                    karaokeList,MainActivity.this);
+            mRecyclerView.setAdapter(mAdapter);
+        }
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
 
-                List<Karaoke> karaokeList = helper.getKaraokesByQuery(query);
+                currentQuery = query;
+                List<Karaoke> karaokeList = helper.getKaraokesByQuery(currentQuery);
                 RecyclerView.Adapter mAdapter = new KaraokeAdapter(MainActivity.this,
                         karaokeList,MainActivity.this);
                 mRecyclerView.setAdapter(mAdapter);
@@ -154,7 +182,8 @@ public class MainActivity extends AppCompatActivity implements
             @Override
             public boolean onQueryTextChange(String newText) {
 
-                List<Karaoke> karaokeList = helper.getKaraokesByQuery(newText);
+                currentQuery = newText;
+                List<Karaoke> karaokeList = helper.getKaraokesByQuery(currentQuery);
                 RecyclerView.Adapter mAdapter = new KaraokeAdapter(MainActivity.this,
                         karaokeList,MainActivity.this);
                 mRecyclerView.setAdapter(mAdapter);
