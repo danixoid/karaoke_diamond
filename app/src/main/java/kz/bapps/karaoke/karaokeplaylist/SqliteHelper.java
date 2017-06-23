@@ -105,6 +105,7 @@ public class SqliteHelper extends SQLiteOpenHelper {
                     "(" + KEY_ARTIST + " LIKE '%" + str +
                     "%' OR " + KEY_SONG + " LIKE '%" + str +
                     "%' OR " + KEY_QUALITY + " LIKE '%" + str +
+                    "%' OR " + KEY_COMP_ID + " LIKE '%" + str +
                     "%')";
             next_line = true;
         }
