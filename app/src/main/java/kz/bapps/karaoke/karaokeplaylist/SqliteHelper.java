@@ -101,11 +101,12 @@ public class SqliteHelper extends SQLiteOpenHelper {
 
         boolean next_line = false;
         for(String str : searches) {
+
             query += (next_line ? " AND " : "") +
-                    "(" + KEY_ARTIST + " LIKE '%" + str +
-                    "%' OR " + KEY_SONG + " LIKE '%" + str +
-                    "%' OR " + KEY_QUALITY + " LIKE '%" + str +
-                    "%' OR " + KEY_COMP_ID + " LIKE '%" + str +
+                    "(" + KEY_ARTIST + " LIKE '%" + str.toUpperCase() +
+                    "%' OR " + KEY_SONG + " LIKE '%" + str.toUpperCase() +
+                    "%' OR " + KEY_QUALITY + " LIKE '%" + str.toUpperCase() +
+                    "%' OR " + KEY_COMP_ID + " LIKE '%" + str.toUpperCase() +
                     "%')";
             next_line = true;
         }
